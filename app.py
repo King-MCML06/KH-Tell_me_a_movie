@@ -4,10 +4,19 @@ import pandas as pd
 import requests
 
 def fetch_poster(movie_id):
-    response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=041da4c77e2037969fdb5270eddddc1b&language=en-US'.format(movie_id))
-    data = response.json()
-    return 'https://image.tmdb.org/t/p/w500/' + data['poster_path']
+    url = 'https://api.themoviedb.org/3/movie/{}?api_key=041da4c77e2037969fdb5270eddddc1b&language=en-US'.format(movie_id)
+    response = requests.get(url)
 
+    if response.status_code != 200:
+        print(f"Error: Received status code {response.status_code} for movie ID {movie_id}")
+        return "https://via.placeholder.com/500x750?text=No+Poster+Available"
+
+    data = response.json()
+
+    if 'poster_path' in data and data['poster_path']:
+        return 'https://image.tmdb.org/t/p/w500/' + data['poster_path']
+    else:
+        return "https://via.placeholder.com/500x750?text=No+Poster+Available"
 
 def recommend(movie):
     index_of_the_movie = movies_data[movies_data['title'] == movie].index[0]
