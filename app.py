@@ -21,7 +21,7 @@ def fetch_poster(movie_id):
 def recommend(movie):
     index_of_the_movie = movies_data[movies_data['title'] == movie].index[0]
     similarity_score = list(enumerate(similarity[index_of_the_movie]))
-    sorted_similar_movies = sorted(similarity_score, key=lambda x: x[1], reverse=True)[1:11]
+    sorted_similar_movies = sorted(similarity_score, key=lambda x: x[1], reverse=True)[1:6]
     recommended_movies = []
     recommended_posters = []
 
