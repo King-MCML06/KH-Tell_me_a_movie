@@ -49,10 +49,3 @@ if st.button('Movies Suggested For You : Click here to view them'):
             st.text(names[i])
             st.image(posters[i], width=150)
 
-    # Create second row of 5 columns
-    row2_cols = st.columns(5)
-    for i, col in enumerate(row2_cols):
-        with col:
-            st.text(names[i + 5])
-            st.image(posters[i + 5], width=150)
-
